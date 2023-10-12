@@ -1,0 +1,9 @@
+.test {
+    display: block;
+}
+.test img {
+    display: none;
+}
+.test:hover img {
+    display: block;
+}

@@ -1,0 +1,67 @@
+.main-shopping {
+    background: url("images/background.png");
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: center;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.main-shopping .trending {
+    display: flex;
+    position: relative;
+    margin-left: 20em;
+    gap: 3em;
+    width: 50%;
+}
+
+i.fa.fa-search.fa, i.fa.fa-regular.fa-thin.fa-heart, i.fa.fa-light.fa-rotate, i.fa.fa-light.fa-bag-shopping {
+    padding: 1em;
+}
+.product1 {
+    width: 10%;
+    height: auto;
+}
+.icon-img1 {
+    display: flex;
+    position: relative;
+    margin-top: -6em;
+    z-index: 3;
+    margin-left: 12em;
+    padding: 2em;
+    gap: 1em;
+}
+.describe1 {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 9em;
+    margin-right: 1em;
+    margin-bottom: 5em;
+}
+.option {
+    color: #fff;
+}
+.option:hover {
+  background-color: #a87288;;
+}
+.product2 {
+    width: 10%;
+}
+.product3 {
+    width: 10%;
+}
+.product4 {
+    width: 10%;
+}
+.carting {
+    border: 10px solid #AC5077;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: 60em;
+    display: block;
+    margin-bottom: 10em;
+    margin-left: 10em;
+  }

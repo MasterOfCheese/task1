@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log-in Page</title>
+    <link rel="stylesheet" href="login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="row">
+        <div class="main col-12 col-sm-12 col-lg-12">
+            <h2 class="heading">Contact Me</h2>
+            <form class="form">
+
+            <div class="form-control">
+                <label for="name">Your full name: </label>
+                <div class="inputForm">
+                    <input type="text" id="name" class="bold-border" placeholder="Please enter your full name"/>
+                </div>
+            </div>
+            
+            <div class="form-control">
+                <label for="account">Account: </label>
+                <div class="inputForm">
+                    <input type="text" id="account" class="bold-border" placeholder="Please enter your account"/>                
+                </div>
+            </div>
+
+            <div class="form-control">
+                <label for="password">Password: </label>
+                <div class="inputForm">
+                    <input type="text" id="password" class="bold-border" placeholder="Please enter your password"/>
+                </div>
+            </div>
+
+            <input type="button" id="btn-send" value="LOGIN" onclick="onBtnSendClick()"/>
+            <p id="message-success" style="display:none;">Đã đăng nhập tài khoản</p>
+        </form>
+        </div>
+      </div>
+  </body>
+</html>
+<script>
+    var gName = document.getElementById("name")
+    var gAccount = document.getElementById("account")
+    var gPassword = document.getElementById("password")
+    
+    function onBtnSendClick() {
+        var vObjectFilter = {
+    name: "",
+    account: "",
+    password: ""
+  };
+  getDataFromInput(vObjectFilter);
+  console.log(vObjectFilter);
+  // Bước 2: Validate dữ liệu
+  var vCheck = validateData(vObjectFilter);
+  console.log(vCheck);
+  // Bước 3: Hiển thị kết quả
+  if(vCheck){
+    displaySuccess();
+  }
+    }
+
+    function getDataFromInput(paramObject) {
+  paramObject.name = gName.value;
+  paramObject.account = gAccount.value;
+  paramObject.password = gPassword.value;
+}
+
+function validateData(paramObject) {
+  "use strict";
+  var vResult = true; // Khởi tạo biến cờ mặc định bằng true
+  var vNameValue = gName.value.trim(); // Lấy dữ liệu và chuẩn hóa dữ liệu
+  var vAccountValue = gAccount.value.trim(); // Lấy dữ liệu và chuẩn hóa dữ liệu
+  var vPasswordValue = gPassword.value.trim(); // Lấy dữ liệu và chuẩn hóa dữ liệu
+    
+  if (vNameValue == "" && vAccountValue == "" && vPasswordValue == "") {
+        vResult=false
+        setError(gName, "Please fill out your name.");
+        setError(gAccount, "Please fill out your account.");
+        setError(gPassword, "Please fill out your password.");
+        alert("sai het roi thg ngu")
+    }
+    else {
+                // Bước 1: Kiểm tra độ mạnh của tên
+                // Name phải có bao gồm ký tự in hoa và in thường và không có số hay ký tự đặc biệt
+        if (!/^[a-zA-ZÀ-ỹ ]+$/.test(vNameValue)) {
+          // "À-ỹ" bao gồm tất cả các chữ cái có dấu trong tiếng Việt.
+            vResult = false;
+            setError(gName, "Tên chỉ được chứa các chữ cái (cả chữ hoa và chữ thường).");
+        alert("sai ten roi thg ngu")
+        }
+        if (vNameValue == "") {
+        vResult=false
+        setError(gName, "Please fill out your name.");
+        alert("sai ten roi thg ngu")
+    }
+
+            // Bước 2: Kiểm tra độ mạnh của tài khoản
+            //Account phải có ít nhất từ 12 ký tự, bao gồm ký tự in hoa, in thường, và ký tự đặc biệt
+        if (vAccountValue.length < 12 || !/[a-zA-Z]/.test(vAccountValue) || !/\d/.test(vAccountValue) || !/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(vAccountValue)) {
+            vResult = false;
+            setError(gAccount, "Tài khoản phải dài ít nhất 12 ký tự và bao gồm ít nhất một chữ hoa, một chữ thường, một chữ số và một ký tự đặc biệt.");
+            alert("sai tk roi thg ngu")
+        }
+        if (vAccountValue == "") {
+            vResult=false
+            setError(gAccount, "Please fill out your account.");
+            alert("sai tk roi thg ngu")
+        }
+
+                // Bước 2: Kiểm tra độ mạnh của mật khẩu
+                //Password phải có ít nhất từ 12 ký tự, bao gồm ký tự in hoa, in thường, và ký tự đặc biệt
+        if (vPasswordValue.length < 12 || !/[a-zA-Z]/.test(vPasswordValue) || !/\d/.test(vPasswordValue) || !/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(vPasswordValue)) {
+    vResult = false;
+            setError(gPassword, "Mật khẩu phải dài ít nhất 12 ký tự và bao gồm ít nhất một chữ hoa, một chữ thường, một chữ số và một ký tự đặc biệt.");
+            alert("sai mk roi thg ngu") 
+}
+        if (vPasswordValue == "") {
+            vResult=false
+            setError(gPassword, "Please fill out your password.");
+            alert("sai mk roi thg ngu")
+        }
+
+    return vResult;
+
+        }
+    
+}
+function setError(paramElement, paramMessage) {
+  "use strict";
+  var vParentElement = paramElement.parentNode; // Truy xuất đến phần tử cha
+  resetMessage(paramElement);
+  vParentElement.classList.add("error");
+  var vSmallElement = document.createElement("small");
+  vSmallElement.innerHTML = paramMessage;
+  vParentElement.appendChild(vSmallElement);
+}
+function resetMessage(paramElement) {
+  "use strict";
+  var vParentElement = paramElement.parentNode; // Truy xuất đến phần tử cha
+  vParentElement.classList.remove("error");
+  vParentElement.classList.remove("success");
+  if (vParentElement.querySelector("small") != null) {
+    vParentElement.querySelector("small").remove("none");
+  }
+}
+function displaySuccess() {
+  "use strict";
+  var vMessageSuccess = document.getElementById("message-success");
+  resetMessage(gName);
+  resetMessage(gAccount);
+  resetMessage(gPassword);
+
+  alert("Đăng nhập thành công!");
+
+  // Reset tất cả các thông báo lỗi
+  resetMessage(gName);
+  resetMessage(gAccount);
+  resetMessage(gPassword);
+
+  vMessageSuccess.style.display = "block";
+
+    // Chuyển hướng đến trang index.html
+  window.location.href = "http://127.0.0.1:5500/index.html";
+}
+</script>

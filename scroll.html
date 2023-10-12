@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box-right">
+<img style="width: 40em; height: 40em; margin-left: 50%; border: 5px solid #333; border-radius: 50%;" src="https://kenh14cdn.com/A3YmnWqkHeph7OwGyu6TwbX57tgTw/Image/2012/05/05B/120520kpthomien04_3e0de.jpg" alt="">
+</div>
+</body>
+</html>
+<script>// Lấy ảnh
+
+// Lấy ảnh
+const image = document.querySelector(".box-righxt img");
+
+function rotateImage() {
+    image.style.transform = `rotate(${(parseFloat(image.style.transform.replace("rotate(", "").replace("deg)", "")) || 0) + 1}deg)`;
+    requestAnimationFrame(rotateImage);
+}
+
+// Start the effect:
+rotateImage();
+
+// Rotate the image 10 times:
+for (let i = 0; i < 10; i++) {
+    // Lặp lại hiệu ứng sau 1 giây:
+    setTimeout(rotateImage, 1000 * i);
+}
+</script>
+</body>
+</html>
+
+
